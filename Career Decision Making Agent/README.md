@@ -1,129 +1,133 @@
-# AI-Specialization-agent
-AI Specialization Pro is a full-stack career decision agent that analyzes a user’s AI profile, ranks best-fit roles with explainability, generates a personalized roadmap + SWOT analysis, supports role comparison, and exports roadmaps as a PDF. Built with React + Tailwind and FastAPI with optional Groq LLM narratives.
+# AdaptiveCareerAgent
 
+AdaptiveCareerAgent is a full-stack **career decision making agent** that analyzes a user’s tech profile, intelligently ranks best-fit roles with transparent reasoning, generates a personalized learning roadmap, provides role-specific SWOT analysis, enables side-by-side career comparison, and exports structured roadmaps as a downloadable PDF.
 
-**AI Specialization Pro**
+Built with React + Tailwind on the frontend and FastAPI on the backend, with optional LLM-based narrative enhancement.
 
-AI Specialization Pro is a full-stack AI career decision agent that helps users choose the best AI role based on their skills and preferences, explains why those roles fit, generates a personalized 6-month roadmap, provides a SWOT analysis per role, supports role comparison, and exports roadmaps as a PDF.
+---
 
+## Overview
 
-**Demo Highlights**
+AdaptiveCareerAgent is an intelligent career decision making agent designed to guide users toward the most suitable tech roles based on:
 
-- Profile onboarding -> analysis
-- Ranked AI roles (agent-ordered)
-- Explainability (reasoning points + factor trace)
-- Personalized Roadmap (timeline, projects, resources)
-- SWOT Analysis (Strengths/Weaknesses/Opportunities/Threats)
-- Career Comparison (side-by-side weighted deltas)
-- Roadmap PDF download
+- Skills  
+- Interests  
+- Experience level  
+- Risk tolerance  
+- Salary preference  
 
+The system explains why a role fits, highlights skill gaps, generates a structured 6-month roadmap, and enables comparison across career paths.
 
-**Tech Stack**
+---
 
-Frontend
+## Highlights
+
+- Profile onboarding → intelligent analysis  
+- Ranked tech roles (agent-prioritized)  
+- Explainability (reasoning points + factor trace)  
+- Personalized roadmap (timeline, milestones, resources)  
+- SWOT analysis (Strengths / Weaknesses / Opportunities / Threats)  
+- Career comparison (side-by-side weighted deltas)  
+- Roadmap PDF download  
+
+---
+
+## Tech Stack
+
+### Frontend
 - React (Vite)
 - TailwindCSS
 - React Router
-- Recharts + Framer Motion
+- Recharts
+- Framer Motion
 
-Backend
-- FastAPI + Pydantic
-- JWT auth
+### Backend
+- FastAPI
+- Pydantic
+- JWT Authentication
 - ReportLab (PDF generation)
-- Optional Groq LLM (OpenAI-compatible) for narrative/explainability enrichment
+- Optional Groq LLM (OpenAI-compatible)
+
+---
+
+## How It Works
+
+### 1. Profile Submission
+
+User provides:
+- Skills & interests  
+- Target goal  
+- Experience level (Beginner / Intermediate / Advanced)  
+- Risk tolerance (0–100)  
+- Salary preference (0–100)
+
+### 2. Deterministic Role Scoring
+
+Backend:
+- Computes weighted scores  
+- Ranks roles  
+- Generates feasibility estimates  
+- Produces explainability traces  
+
+### 3. LLM Enhancement
+
+If enabled:
+- Adds concise reasoning summaries  
+- Enhances roadmap narrative  
+- Generates SWOT narrative  
+
+> Core ranking remains deterministic for consistency.  
+> LLM enhances clarity — not decision logic.
+
+---
+## Project Structure
+
+AdaptiveCareerAgent/
+│
+├── src/ # React frontend
+│
+├── backend/ # FastAPI backend
+│ ├── main.py # API routes
+│ ├── agent.py # Decision-making logic
+│ ├── roadmap_generator.py # Roadmap engine
+│ ├── career_profile.py # SWOT logic
+│ ├── llm.py # Optional LLM integration
+│ ├── pdf_generator.py # PDF export module
+│ └── requirements.txt
 
 
+---
 
-**How It Works (High-Level)**
+## Setup & Run
 
-1) User submits profile:
-   - skills, interests, goal
-   - experience level (Beginner / Intermediate / Advanced)
-   - risk tolerance and salary preference (0-100)
-
-2) Backend generates deterministic scores and ranks roles.
-
-3) Optional LLM layer adds:
-   - short reasoning points for explainability
-   - narrative summaries for Roadmap and SWOT
-
-Note: The ranking/scoring is deterministic for consistency; the LLM is used to improve readability and user experience.
-
-**Project Structure**
-
-.
-|-- src/                    # React frontend
-|-- backend/                # FastAPI backend
-|   |-- main.py              # API routes
-|   |-- agent.py             # deterministic role scoring + ranking
-|   |-- roadmap_generator.py # roadmap logic (+ optional LLM narrative)
-|   |-- career_profile.py    # SWOT logic (+ optional LLM narrative)
-|   |-- llm.py               # Groq integration (optional)
-|   |-- pdf_generator.py     # ReportLab PDF generation
-|   |-- requirements.txt
+### Backend
 
 
-
-**Setup & Run (Local)**
-
-Backend (FastAPI)
-From the repo root:
-
-  py -m pip install -r backend\requirements.txt
-  py -m uvicorn backend.main:app --reload --port 8000
-
-Backend runs on:
-  http://127.0.0.1:8000
-
-Health check:
-  GET /health
-
-Frontend (React)
-From the repo root:
-
-  npm install
-  npm run dev
-
-Frontend runs on:
-  http://localhost:5173
+py -m pip install -r backend\requirements.txt
+py -m uvicorn backend.main:app --reload --port 8000
 
 
+Backend runs at:
+http://127.0.0.1:8000
 
-**Environment Variables**
-
-Frontend
-Create .env (optional):
-
-  VITE_API_BASE_URL=http://127.0.0.1:8000
-
-Backend (Optional LLM)
-LLM is optional; the app works without it.
-
-  GROQ_API_KEY=your_key_here
-  GROQ_MODEL=llama-3.1-8b-instant
-
-If GROQ_API_KEY is not set:
-- the app still runs
-- narratives/reasoning points fall back to deterministic text
+### Frontend
 
 
-
-**Key API Endpoints**
-
-- POST /auth/signup
-- POST /auth/login
-- GET  /careers
-- POST /analyze
-- POST /roadmap/{career_id}
-- POST /roadmap/pdf (downloads PDF)
-- POST /career/{career_id} (SWOT + stats)
-- POST /compare
+npm install
+npm run dev
 
 
+Frontend runs at:
+http://localhost:5173
 
-**Roadmap / Future Improvements**
+---
 
-- Add real market datasets (salary, demand, growth by region)
-- Expand the role catalog beyond the current curated set
-- Track user learning progress and update recommendations over time
-- Add more explainability visualizations and feedback loops
+## Future Enhancements
+
+- Integrate real-time market datasets
+- Expand role catalog
+- Add adaptive re-ranking based on learning progress
+- Enhance explainability visualizations
+- Implement feedback loops for personalization
+
+
